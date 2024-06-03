@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Flight {
+  flightId       String      @id
+  departure      String
+  departureTime  DateTime
+  destination    String
+  arrivalTime    DateTime
+  flightDuration Float // 以小時為單位
+  passengers     Passenger[]
+}
+
+model Passenger {
+  idNumber     String
+  gender       Boolean
+  name         String
+  phone        String
+  cabinClass   Boolean
+  personNumber Int
+
+  flightId String
+  flight   Flight @relation(fields: [flightId], references: [flightId])
+
+  @@id([idNumber, flightId])
+}
