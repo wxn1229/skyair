@@ -14,6 +14,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://health-food-search-system-client.vercel.app",
+      "https://skyair-nu.vercel.app/",
     ],
     credentials: true,
   })
